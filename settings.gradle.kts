@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Eco Pulse"
+rootProject.name = "ReCellMate"
 include(":app")
  
