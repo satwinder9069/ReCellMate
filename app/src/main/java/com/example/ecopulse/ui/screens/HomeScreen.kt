@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -97,7 +98,6 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel(), navController: NavControl
     var selectedTopic by remember { mutableStateOf<TopicDetails?>(null) }
     var isBottomSheetOpen by remember { mutableStateOf(false) }
 
-
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -125,7 +125,7 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel(), navController: NavControl
             snapshotFlow { listState.firstVisibleItemScrollOffset }
                 .collect { scrollOffset ->
                     coroutineScope.launch {
-                        isFabExpanded = scrollOffset == 1   // Collapse text if scrolling down
+                        isFabExpanded = scrollOffset == 0  // Collapse text if scrolling down
                     }
                 }
         }
@@ -259,15 +259,19 @@ fun HomeTopAppBar(scrollBehavior: TopAppBarScrollBehavior, navController: NavCon
     TopAppBar(
         modifier = Modifier.background(MaterialTheme.colorScheme.surface),
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color(155, 168, 171)
+            containerColor = Color(255, 255, 255, 255)
         ),
         title = {
-            Text(
-                text = "Resale Pro",
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.open_sans))),
-                fontSize = 20.sp,
-                color = Color(6, 20, 27 )
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(painter = painterResource(R.drawable.recycling_earth), contentDescription = null)
+                Text(
+                    text = "ReCellMate",
+                    style = TextStyle(fontFamily = FontFamily(Font(R.font.open_sans))),
+                    fontSize = 20.sp,
+                    color = Color(6, 20, 27 )
+                )
+            }
+
         },
         scrollBehavior = scrollBehavior,
         actions = {

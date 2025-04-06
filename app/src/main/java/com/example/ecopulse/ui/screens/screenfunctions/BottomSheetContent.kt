@@ -112,7 +112,7 @@ fun BottomSheetContent(topic: TopicDetails) {
             )
             topic.preventionTips.forEach {
                 Text(
-                    text = "✓ $it",
+                    text = "✔ $it",
                     fontFamily = FontFamily(Font(R.font.open_sans)),
                     fontSize = 16.sp, color = Color(74, 92, 106)
                 )

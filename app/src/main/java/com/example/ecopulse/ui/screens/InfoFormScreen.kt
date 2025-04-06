@@ -19,14 +19,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -46,14 +44,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.ecopulse.data.models.AIResponse
 import com.example.ecopulse.routes.Screen
 import com.example.ecopulse.utils.InfoForm
 import com.example.ecopulse.utils.InfoFormViewModel
-import com.example.ecopulse.utils.saveImageToGallery
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,8 +64,6 @@ fun InfoFormScreen(
     val capturedImageFile = viewModel.capturedImageFile
 
     val formState = viewModel.formState
-    var deviceInfo = remember { mutableStateOf(InfoForm()) }
-    val errorMessage = viewModel.errorMessage
     val errors = remember { mutableStateMapOf<String, String>() }
     val scrollState = rememberScrollState()
 
@@ -100,7 +93,7 @@ fun InfoFormScreen(
         ) {
             capturedImageFile?.let {
                 Log.d("URI", "Captured Image, $uri")
-                Log.d("viewModeelcapturedImage.", "Captured Image, ${viewModel.capturedImageFile}")
+                Log.d("viewModel captured Image.", "Captured Image, ${viewModel.capturedImageFile}")
                 Image(
                     painter = rememberAsyncImagePainter(model = it),
                     contentDescription = "Captured Image",
@@ -146,9 +139,7 @@ fun InfoFormScreen(
             OutlinedTextField(
                 value = formState.model,
                 onValueChange = {
-                    deviceInfo.value = deviceInfo.value.copy(model = it)
                     viewModel.formState = viewModel.formState.copy(model = it.trim())
-
                     errors["Model"] = if (it.isBlank()) "Model is Required" else ""
                 },
                 label = { Text("Model (e.g., Galaxy S21, iPhone 13)") },
@@ -168,9 +159,7 @@ fun InfoFormScreen(
                 OutlinedTextField(
                     value = formState.internalMemory,
                     onValueChange = {
-//                        deviceInfo.value = deviceInfo.value.copy(internalMemory = it)
                         viewModel.formState = viewModel.formState.copy(internalMemory = it.trim())
-
                         errors["Internal Memory"] =
                             if (it.isBlank()) "Internal Memory is Required" else ""
                     },
@@ -181,7 +170,7 @@ fun InfoFormScreen(
                     ),
                     isError = errors["Internal Memory"]?.isNotEmpty() == true,
                     shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier.fillMaxWidth(0.6f)
+                    modifier = Modifier.fillMaxWidth(0.5f)
                 )
                 if (errors["Internal Memory"]?.isNotEmpty() == true) {
                     Text(text = errors["Internal Memory"] ?: "", color = Color.Red)
@@ -189,7 +178,6 @@ fun InfoFormScreen(
                 OutlinedTextField(
                     value = formState.ram,
                     onValueChange = {
-//                        deviceInfo.value = deviceInfo.value.copy(ram = it)
                         viewModel.formState = viewModel.formState.copy(ram = it.trim())
 
                         errors["ram"] = if (it.isBlank()) "Field cannot be empty" else ""
@@ -201,17 +189,19 @@ fun InfoFormScreen(
                     ),
                     isError = errors["ram"]?.isNotEmpty() == true,
                     shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier
+                    modifier = Modifier.fillMaxWidth().height(60.dp)
                 )
                 if (errors["ram"]?.isNotEmpty() == true) {
-                    Text(text = errors["ram"] ?: "", color = Color.Red)
+                    Text(text = errors["ram"] ?: " ",
+                        color = if (errors["ram"]?.isNotEmpty() == true) Color.Red else Color.Transparent,
+                        modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+                    )
                 }
             }
 
             OutlinedTextField(
                 value = formState.batteryInfo,
                 onValueChange = {
-//                    deviceInfo.value = deviceInfo.value.copy(batteryInfo = it)
                     viewModel.formState = viewModel.formState.copy(batteryInfo = it.trim())
 
                     errors["battery"] = if (it.isBlank()) "Field cannot be empty" else ""
@@ -232,9 +222,7 @@ fun InfoFormScreen(
             OutlinedTextField(
                 value = formState.screenSize,
                 onValueChange = {
-//                    deviceInfo.value = deviceInfo.value.copy(screenSize = it)
                     viewModel.formState = viewModel.formState.copy(screenSize = it)
-
                     errors["screenSize"] = if (it.isBlank()) "Screen Size is required!" else ""
                 },
                 label = { Text("Screen Size (inches)") },
@@ -255,7 +243,7 @@ fun InfoFormScreen(
                     viewModel.formState = viewModel.formState.copy(os = it.trim())
                     errors["os"] = if (it.isBlank()) "Field cannot be empty" else ""
                 },
-                label = { Text("Operating System (Android, macOs)") },
+                label = { Text("Operating System (Android, iOS)") },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Next
                 ),
@@ -339,7 +327,7 @@ fun InfoFormScreen(
                     viewModel.formState = viewModel.formState.copy(normalizedNewPrice = it.trim())
                     errors["normalizedNewPrice"] = if (it.isBlank()) "Field cannot be empty" else ""
                 },
-                label = { Text("Normalized New Price") },
+                label = { Text("New Unit Price") },
                 isError = errors["normalizedNewPrice"]?.isNotEmpty() == true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 shape = RoundedCornerShape(16.dp),

@@ -2,33 +2,31 @@ package com.example.ecopulse.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.ecopulse.R
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 class HomeViewModel : ViewModel() {
     val cardItems = listOf(
         EcoCard(
-            R.drawable.electronic_recycling_art,
+            R.drawable.silent_crises_of_digital_age,
             "E-Waste",
             "The Silent Crisis of the Digital Age"
         ),
         EcoCard(
-            R.drawable.everything_is_recycleble,
+            R.drawable.urgency_now,
             "The Urgency Now",
             "E-Waste Today, No Tomorrow"
         ),
         EcoCard(
-            R.drawable.recycle_today,
+            R.drawable.future_proofing_our_planet,
             "Future- Proofing Our Planet",
             "Recycle Electronics Secure the Future"
         ),
         EcoCard(
-            R.drawable.recycling_concept,
+            R.drawable.smart_disposal,
             "Smart Disposal For Smart Devices",
             "Don't Trash Tech, Recycle It Right!"
         ),
         EcoCard(
-            R.drawable.earch,
+            R.drawable.out_of_sight,
             "The Hidden Toxin",
             "E-Waste: Out of Sight Shouldn't Mean Out of Mind."
         )
@@ -65,9 +63,9 @@ class HomeViewModel : ViewModel() {
             ),
             imageRes = listOf(
                 R.drawable.imgres_1,
-                R.drawable.burning_3,
-                R.drawable.burning_1,
-                R.drawable.imgres2,
+                R.drawable.imgres_2,
+                R.drawable.imgres_3,
+                R.drawable.imgres_4,
 
                 )
         ),
@@ -93,8 +91,8 @@ class HomeViewModel : ViewModel() {
                 "Advocate for stricter dumping regulations"
             ),
             imageRes = listOf(
-                R.drawable.imgres4,
-                R.drawable.imageres3,
+                R.drawable.imgres_5,
+                R.drawable.imgres_6,
             )
         ),
         TopicDetails(
@@ -112,44 +110,39 @@ class HomeViewModel : ViewModel() {
                 "Wipe data but don't destroy components"
             ),
             imageRes = listOf(
-                R.drawable.imgres5,
-                R.drawable.imgres10
+                R.drawable.imgres_7,
+                R.drawable.imgres_8
 
             )
         ),
         TopicDetails(
             title = "Your Guide to Responsible E-Waste Recycling",
-            subtitle = "Step-by-step sustainability",
-            description = "Follow these steps to ensure your e-waste gets recycled properly...",
+            subtitle = "How to Recycle Right & Protect People + Planet ",
+            description = "Every year: \n 5.3B phones thrown away globally \n 1 smartphone = 165 lbs of mined waste \n 70% of toxic waste in landfills is electronics.",
             effects = listOf(
-                "95% of device materials can be reused",
-                "Proper recycling creates green jobs",
-                "Reduces demand for conflict minerals"
+                "Health Risks\n" +
+                        "   - Battery fires: Lithium leaks cause burns  \n" +
+                        "   - Brain damage: Lead in solder affects kids  \n" +
+                        "   - Cancer risk: Cobalt/cadmium in batteries",
+                "Data Dangers - 23% of used phones contain unwiped personal data."
             ),
             preventionTips = listOf(
-                "1. Backup and factory reset devices",
-                "2. Remove personal accessories",
-                "3. Find certified drop-off locations",
-                "4. Get receipt for proper documentation"
+                "Before You Ditch It  \n" +
+                        "   1. Factory reset + remove SIM/SD cards  \n" +
+                        "   2. Try selling (Decluttr, Gazelle, FB Marketplace)  \n" +
+                        "   3. Repair screens/batteries (uBreakiFix costs 60% less than new)",
+                "Backup and factory reset devices",
+                "Remove personal accessories",
+                "Find certified drop-off locations",
+                "Get receipt for proper documentation"
             ),
             imageRes = listOf(
-                R.drawable.imgres9,
-                R.drawable.preview,
-
+                R.drawable.imgres_9,
+                R.drawable.imgres_10,
                 )
         ),
     )
-
     fun getTopicDetail(title: String): TopicDetails? {
         return topicDetails.find { it.title == title }
     }
-
-    /*
-        private val _selectedTip = MutableStateFlow<HealthTip?>(null)
-        val selectedTip: StateFlow<HealthTip?> = _selectedTip
-        fun selectTip(tip: HealthTip) {
-            _selectedTip.value = tip
-        }
-    */
-
 }

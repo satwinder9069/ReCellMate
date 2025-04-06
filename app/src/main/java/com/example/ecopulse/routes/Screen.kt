@@ -3,6 +3,7 @@ package com.example.ecopulse.routes
 import android.net.Uri
 
 sealed class Screen(val route: String) {
+    object SplashScreen: Screen("splash_screen")
     object HomeScreen : Screen("home_screen")
     object User: Screen("user_screen")
     object LearnMore: Screen("learn_more")

@@ -40,7 +40,6 @@ fun SuggestionsBanner() {
                 .fillMaxWidth()
                 .padding(top = 5.dp, bottom = 1.dp),
             verticalAlignment = Alignment.CenterVertically,
-//            horizontalArrangement = Arrangement.Absolute.SpaceEvenly
         ) {
             Image(
                 painterResource(R.drawable.recycle),

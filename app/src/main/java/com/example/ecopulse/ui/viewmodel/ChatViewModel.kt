@@ -21,9 +21,6 @@ class ChatViewModel(private val repository: GeminiRepository): ViewModel() {
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
-    var messages by mutableStateOf<List<Message>>(emptyList())
-        private set
-
     private val _chatHistory = MutableLiveData<List<GeminiMessage>>(emptyList())
     val chatHistory: LiveData<List<GeminiMessage>> get() = _chatHistory
 

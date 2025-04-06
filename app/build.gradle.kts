@@ -1,3 +1,10 @@
+import java.util.Properties
+
+val properties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if(localPropertiesFile.exists()) {
+    properties.load(localPropertiesFile.inputStream())
+}
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -17,7 +24,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "GEMINI_API_KEY", "\"${project.findProperty("GEMINI_API_KEY")}\"")
+        buildConfigField("String", "GEMINI_API_KEY", "\"${properties["GEMINI_API_KEY"]}\"")
 
     }
 
@@ -85,8 +92,6 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.2.2")
 
-
-
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
@@ -103,14 +108,6 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
-
-//    implementation("io.github.sanbeguin:osmcompose:1.1.0")
-//    implementation("com.google.accompanist:accompanist-permissions:0.31.2-alpha")
-//    implementation("com.google.android.gms:play-services-location:21.0.1")
-//
-//    implementation(libs.retrofit)
-//    implementation(libs.converter.gson)
-
-
+    implementation("com.airbnb.android:lottie-compose:6.1.0")
 
 }

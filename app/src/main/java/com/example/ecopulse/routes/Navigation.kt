@@ -20,6 +20,7 @@ import com.example.ecopulse.utils.InfoFormViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ecopulse.data.api.RetrofitInstance
 import com.example.ecopulse.data.repository.AIRepository
+import com.example.ecopulse.ui.screens.SplashScreen
 import com.example.ecopulse.ui.viewmodel.AIViewModel
 import com.example.ecopulse.ui.viewmodel.AIViewModelFactory
 
@@ -29,11 +30,11 @@ import com.example.ecopulse.ui.viewmodel.AIViewModelFactory
 fun Navigation() {
     val navController = rememberNavController()
     val infoFormViewModel: InfoFormViewModel = viewModel()
-    val api = RetrofitInstance.api
-    val repository = AIRepository(api)
-    val aiViewModel: AIViewModel = viewModel(factory = AIViewModelFactory(repository))
 
-    NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.SplashScreen.route) {
+        composable(Screen.SplashScreen.route) {
+            SplashScreen(navController = navController)
+        }
         composable(Screen.HomeScreen.route) {
             HomeScreen(navController = navController)
         }

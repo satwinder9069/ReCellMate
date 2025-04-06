@@ -1,7 +1,6 @@
 package com.example.ecopulse.ui.screens
 
 import android.net.Uri
-import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -44,12 +43,13 @@ fun ReviewScreen(
     file?.let {
         viewModel.updateCapturedImageFile(it)
     }
-    val base64String = imageFileToBase64(file!!)
+
+    /*val base64String = imageFileToBase64(file!!)
     if (base64String.isNullOrEmpty()) {
         Log.d("Base64", "Base64 conversion failed or result is empty")
     } else {
         Log.d("Base64", "Base64 conversion successful: ${base64String.take(100)}...")
-    }
+    }*/
 
     Box(modifier = Modifier.fillMaxSize()) {
         file.let {

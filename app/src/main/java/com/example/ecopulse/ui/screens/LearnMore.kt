@@ -145,21 +145,6 @@ fun MessageInput(
             .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        /* TextField(
-             value = userInput,
-             onValueChange = { userInput = it },
-             modifier = Modifier.weight(1f),
-             placeholder = { Text("Type a message...") }
-         )
-         IconButton(onClick = {
-             if (userInput.isNotBlank()) {
-                 chatViewModel.sendMessage(userInput)
-                 userInput = ""
-             }
-         }) {
-             Icon(imageVector = Icons.Default.Send, contentDescription = "Send")
-         }*/
-
         Row(
             modifier = Modifier
                 .weight(1f)

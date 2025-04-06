@@ -7,7 +7,6 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.io.File
 import java.time.LocalDate
@@ -28,21 +27,22 @@ data class InfoForm(
     var normalizedNewPrice: String = "",
 )
 class InfoFormViewModel : ViewModel() {
-
+    var formState by mutableStateOf(InfoForm())
+    var errorMessage by mutableStateOf("")
     var capturedImageFile by mutableStateOf<File?>(null)
         private set
 
     fun updateCapturedImageFile(file: File?) {
         capturedImageFile = file
     }
-    var formState by mutableStateOf(InfoForm())
-    var errorMessage by mutableStateOf("")
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun validateForm(): Boolean {
+        val daysUsedInt = formState.daysUsed.trim().toIntOrNull()
+        val minPrice = 1000.0
+        val maxPrice = 50000.0
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
         val today = LocalDate.now()
-
         val releaseYearTrimmed = formState.releaseYear.trim()
         val releaseYearInt = releaseYearTrimmed.toIntOrNull()
         if (releaseYearInt == null || releaseYearInt > currentYear) {
@@ -50,11 +50,6 @@ class InfoFormViewModel : ViewModel() {
             println(errorMessage)
             return false
         }
-
-        val daysUsedInt = formState.daysUsed.trim().toIntOrNull()
-        val minPrice = 1000.0
-        val maxPrice = 50000.0
-
         return when {
 
             formState.deviceBrand.isEmpty() -> {
@@ -105,18 +100,6 @@ class InfoFormViewModel : ViewModel() {
                 Log.d("Validation", errorMessage)
                 false
             }
-
-/*            formState.releaseYear.isEmpty() || formState.releaseYear.toIntOrNull() == null || formState.releaseYear.toInt() !in 1900..currentYear -> {
-                errorMessage = "Enter valid release year (1900..$currentYear"
-                false
-            }
-
-            formState.daysUsed.toIntOrNull()?.let { days ->
-                days !in 1..maxDaysUsed
-            } == true -> {
-                errorMessage = "Days Worked should be between 1 and $maxDaysUsed"
-                false
-            }*/
             formState.releaseYear.isEmpty() || releaseYearInt == null -> {
                 errorMessage = "Please enter a valid Release Year"
                 false
@@ -150,10 +133,3 @@ class InfoFormViewModel : ViewModel() {
         }
     }
 }
-
-
-/*fun normalizePrice(priceInput: String, min: Double = 1000.0, max: Double = 10000.0) : Double {
-    val price = priceInput.toDouble()
-    return(price - min) / (max - min)
-}*/
-
