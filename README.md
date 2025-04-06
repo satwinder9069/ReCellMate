@@ -1,6 +1,6 @@
 #ReCellMate
 
-**ReCellMate(MVP Version)** is an Android application focused on promoting responsible e-waste management. This application helps users estimate the resale orice of theie mobile phones based on the device's conditions and specifications. The app uses AI/ML models to make accurate price predictions and also integrates with **GEMINI AI** for answering user queries about device or the resale process.
+**ReCellMate(MVP Version)** is an Android application focused on promoting responsible e-waste management. This application helps users estimate the resale price of theie mobile phones based on the device's conditions and specifications. The app uses AI/ML models to make accurate price predictions and also integrates with **GEMINI AI** for answering user queries about device or the resale process.
 
 ##Features
 
