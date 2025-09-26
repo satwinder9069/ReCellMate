@@ -30,8 +30,7 @@ Before you begin, make sure you have the following installed:
 
 1. Clone the repository:
  ```
-   git clone         https://github.com/yourusername/MobilePricePredictor.git
-
+git clone         https://github.com/yourusername/MobilePricePredictor.git
 ```
 2. Open project in Android Studio.
 3. Sync Gradle dependencies.
